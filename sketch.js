@@ -1,15 +1,33 @@
-console.log("I believe I can do this!");
+let frames = [];
+let myAge = 10;
+let myName = "Alireza";
+let myStudentsAges = [];
+let numFrames = 8;
 
-function setup() {
-  createCanvas(800, 600);
+let firstName = "alireza";
+let lastName = "Karduni";
+
+let fullName = firstName + " " + lastName;
+
+async function setup() {
+  createCanvas(800, 420);
+
+  for (let i = 0; i < numFrames; i++) {
+    // let fileName = `dance_frames/dance${i}.png`;
+    let fileName = "dance_frames/dance" + i + ".png";
+
+    frames.push(await loadImage(fileName));
+  }
 }
 
 function draw() {
-  background(20);
-  fill(255, 120, 60);
-  circle(0, 0, 100);
-  fill(100, 120, 60);
-  rectMode(CENTER);
-  rect(200, 200, 50, 50);
-  circle(200, 300, 40);
+  background(120);
+  fill("black");
+  text(fullName, 100, 100);
+
+  let speed = 10;
+  let slowFrame = floor(frameCount / speed);
+  let index = slowFrame % frames.length;
+  text(index, 500, 160);
+  image(frames[index], 100, 100);
 }
